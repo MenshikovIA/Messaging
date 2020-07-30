@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from cloudinary.models import CloudinaryField
 
 
 class Authority(models.Model):
@@ -9,7 +10,8 @@ class Authority(models.Model):
         verbose_name_plural = "Authorities"
 
     name = models.CharField(max_length=64)
-    photo = models.ImageField(null=True, blank=True, upload_to='uploads/photos/')
+    photo = CloudinaryField('image', null=True, blank=False)
+    # photo = models.ImageField(null=True, blank=True, upload_to='uploads/photos/')
     description = models.TextField(null=True, blank=True)
     is_deputy = models.BooleanField(default=False)
 
@@ -40,7 +42,8 @@ class Message(models.Model):
     text = models.TextField()
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name='messages')
     previous = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='answers')
-    attachment = models.FileField(null=True, blank=True, upload_to='uploads/%Y/%m/%d/')
+    attachment = CloudinaryField('auto', null=True, blank=True)
+    # attachment = models.FileField(null=True, blank=True, upload_to='uploads/%Y/%m/%d/')
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
     indent = models.PositiveSmallIntegerField(default=0)

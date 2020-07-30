@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
+import cloudinary
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY', '')
+SECRET_KEY = os.getenv('SECRET_KEY', '=%84wvbeh*!5g=oec^n5y*kdv1zy6u=%rr2^!mhldgzko=#bz2')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'threads.apps.ThreadsConfig',
 
     'rest_framework',
-    'webpack_loader',
+    # 'webpack_loader',
+    'cloudinary',
 
 ]
 
@@ -91,7 +93,7 @@ DATABASES = {
         'NAME': 'd3qq1nft05m8ed',
         'USER': 'yiyoarpcwwkpym',
         'PASSWORD': 'bf0984b995f6744bf6b32c6145f4d7db70e8daaf4bb402a52dd25971d669825d',
-        'HOST': 'ec2-46-137-123-136.eu-west-1.compute.amazonaws.co',
+        'HOST': 'ec2-46-137-123-136.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -146,11 +148,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
-    }
-}
+# WEBPACK_LOADER = {
+#     'DEFAULT': {
+#         'BUNDLE_DIR_NAME': 'dist/',
+#         'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
+#     }
+# }
 
 django_heroku.settings(locals())
+
+cloudinary.config(
+  cloud_name="htsykqgpi",
+  api_key="892394954187679",
+  api_secret="pKZJOmrH7nP4VNna5jnuA_mRDoI"
+)
