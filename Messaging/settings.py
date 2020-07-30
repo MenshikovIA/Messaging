@@ -20,18 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=%84wvbeh*!5g=oec^n5y*kdv1zy6u=%rr2^!mhldgzko=#bz2'
+SECRET_KEY = os.getenv('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
-# CORS_ORIGIN_WHITELIST = [
-#     "http://localhost:8080",
-#     "http://127.0.0.1:8080"
-# ]
-
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'heroku.com']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,7 +44,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
