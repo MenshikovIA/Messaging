@@ -8,6 +8,7 @@ class Authority(models.Model):
 
     class Meta:
         verbose_name_plural = "Authorities"
+        ordering = ['name', ]
 
     name = models.CharField(max_length=64)
     photo = CloudinaryField('Photo', null=True, blank=False)
@@ -20,6 +21,10 @@ class Authority(models.Model):
 
 
 class Topic(models.Model):
+
+    class Meta:
+        ordering = ['title', ]
+
     title = models.CharField(max_length=128)
     description = models.TextField(null=True, blank=True)
 
@@ -28,6 +33,10 @@ class Topic(models.Model):
 
 
 class Thread(models.Model):
+
+    class Meta:
+        ordering = ['created_at', ]
+
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, related_name='threads')
     title = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -38,6 +47,10 @@ class Thread(models.Model):
 
 
 class Message(models.Model):
+
+    class Meta:
+        ordering = ['created_at', ]
+
     author = models.ForeignKey(Authority, on_delete=models.CASCADE, related_name='messages')
     text = models.TextField()
     thread = models.ForeignKey(Thread, on_delete=models.CASCADE, related_name='messages')
