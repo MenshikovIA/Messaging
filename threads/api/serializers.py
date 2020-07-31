@@ -6,11 +6,12 @@ class MessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Message
-        exclude = ["created_at", "modified_at"]
+        exclude = ["modified_at", ]
 
     author_name = serializers.SerializerMethodField(read_only=True)
     author_photo = serializers.SerializerMethodField(read_only=True)
     thread_title = serializers.SerializerMethodField(read_only=True)
+    created_at = serializers.DateTimeField(format="%d %b %Y %H:%M")
     indent = serializers.IntegerField(read_only=True)
 
     @staticmethod
